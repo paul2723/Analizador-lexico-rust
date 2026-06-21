@@ -89,6 +89,33 @@ tokens = [
     'FLECHA', 'FLECHA_GRUESA', 'ARROBA', 'INTERROGACION', 'AMPERSAND',
 ] + list(palabras_reservadas.values()) + list(tipos_primitivos.values())
 
+#--------Cristhian Herrera 2024-06--------
+# Componentes: Palabras reservadas, Identificadores, Comentarios
+
+
+# Comentarios de una sola linea: // ...   -> se ignoran (no generan token)
+def t_COMENTARIO_LINEA(t):
+    r'//.*'
+    pass  # no se retorna token: los comentarios no pasan al analizador sintactico
+
+
+# Comentarios de multiples lineas: /* ... */  -> se ignoran (no generan token)
+def t_COMENTARIO_BLOQUE(t):
+    r'/\[\s\S]?\*/'
+    t.lexer.lineno += t.value.count('\n')
+    pass  # no se retorna token
+
+
+# Identificadores y palabras reservadas / tipos primitivos.
+# Patron de variable en Rust: letra o '' seguido de letras, numeros o ''.
+def t_IDENTIFICADOR(t):
+    r'[a-zA-Z_][a-zA-Z0-9_]*'
+    if t.value in palabras_reservadas:
+        t.type = palabras_reservadas[t.value]
+    elif t.value in tipos_primitivos:
+        t.type = tipos_primitivos[t.value]
+    return t
+#----------------------------------
 
 # Componentes a cargo: Tipos de datos (literales) y Delimitadores
  
@@ -136,3 +163,5 @@ t_FLECHA_GRUESA    = r'=>'
 t_ARROBA           = r'@'
 t_INTERROGACION    = r'\?'
  
+
+
