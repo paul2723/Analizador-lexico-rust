@@ -101,9 +101,9 @@ def t_COMENTARIO_LINEA(t):
 
 # Comentarios de multiples lineas: /* ... */  -> se ignoran (no generan token)
 def t_COMENTARIO_BLOQUE(t):
-    r'/\[\s\S]?\*/'
+    r'/\*[\s\S]*?\*/'
     t.lexer.lineno += t.value.count('\n')
-    pass  # no se retorna token
+    pass # no se retorna token
 
 
 # Identificadores y palabras reservadas / tipos primitivos.
@@ -116,7 +116,7 @@ def t_IDENTIFICADOR(t):
         t.type = tipos_primitivos[t.value]
     return t
 #----------------------------------
-
+#------------------Paul Alcivar Zavala---------------------------
 # Componentes a cargo: Tipos de datos (literales) y Delimitadores
  
 # --- Literales (tipos de datos primitivos en su forma literal) ---
@@ -162,8 +162,8 @@ t_FLECHA           = r'->'
 t_FLECHA_GRUESA    = r'=>'
 t_ARROBA           = r'@'
 t_INTERROGACION    = r'\?'
-
-
+#------------------------------------------------
+#------------------Gustavo Moscoso Ramos---------------------------
 
 # Componentes a cargo: Operadores aritmeticos, asignacion, comparacion, logicos y a nivel de bits
 
@@ -189,7 +189,6 @@ t_NOT_LOGICO     = r'!'
 # --- Operadores a nivel de bits (shift antes que comparacion simple) ---
 t_SHIFT_IZQ      = r'<<'
 t_SHIFT_DER      = r'>>'
-t_AND_BIT        = r'&'
 t_OR_BIT         = r'\|'
 t_XOR_BIT        = r'\^'
 
@@ -206,5 +205,5 @@ t_MENOR          = r'<'
 t_MAYOR          = r'>'
 
 # --- Referencias (ampersand simple usado para &T, &mut T) ---
-t_AMPERSAND_SIMPLE = r'&'
+t_AMPERSAND = r'&'
 
