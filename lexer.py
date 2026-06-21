@@ -206,4 +206,27 @@ t_MAYOR          = r'>'
 
 # --- Referencias (ampersand simple usado para &T, &mut T) ---
 t_AMPERSAND = r'&'
+t_ignore = ' \t'
+
+
+def t_newline(t):
+    r'\n+'
+    t.lexer.lineno += len(t.value)
+
+
+def t_error(t):
+    print(f"Error lexico: caracter no reconocido '{t.value[0]}' en la linea {t.lineno}")
+    t.lexer.errores.append({
+        'linea': t.lineno,
+        'caracter': t.value[0],
+        'mensaje': f"Caracter no reconocido '{t.value[0]}'"
+    })
+    t.lexer.skip(1)
+
+
+def construir_lexer():
+    """Crea una nueva instancia del lexer con su lista de errores propia."""
+    lexer = lex.lex()
+    lexer.errores = []
+    return lexer
 
