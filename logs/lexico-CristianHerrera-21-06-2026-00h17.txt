@@ -1,0 +1,98 @@
+======================================================================
+LOG DE ANALISIS LEXICO
+======================================================================
+Desarrollador      : CristianHerrera
+Archivo analizado  : algoritmo1.rs
+Fecha y hora       : 21-06-2026 00:17:08
+Total de tokens    : 82
+Total de errores   : 0
+======================================================================
+
+--- TOKENS RECONOCIDOS ---
+LINEA   TOKEN                 VALOR                         
+------------------------------------------------------------
+9       FN                    fn                            
+9       IDENTIFICADOR         factorial                     
+9       PARENTESIS_IZQ        (                             
+9       IDENTIFICADOR         n                             
+9       DOS_PUNTOS            :                             
+9       TIPO_U32              u32                           
+9       PARENTESIS_DER        )                             
+9       FLECHA                ->                            
+9       TIPO_U32              u32                           
+9       LLAVE_IZQ             {                             
+10      IF                    if                            
+10      IDENTIFICADOR         n                             
+10      IGUAL_IGUAL           ==                            
+10      NUMERO_ENTERO         0                             
+10      LLAVE_IZQ             {                             
+11      RETURN                return                        
+11      NUMERO_ENTERO         1                             
+11      PUNTO_COMA            ;                             
+12      LLAVE_DER             }                             
+12      ELSE                  else                          
+12      LLAVE_IZQ             {                             
+13      RETURN                return                        
+13      IDENTIFICADOR         n                             
+13      MULTIPLICACION        *                             
+13      IDENTIFICADOR         factorial                     
+13      PARENTESIS_IZQ        (                             
+13      IDENTIFICADOR         n                             
+13      MENOS                 -                             
+13      NUMERO_ENTERO         1                             
+13      PARENTESIS_DER        )                             
+13      PUNTO_COMA            ;                             
+14      LLAVE_DER             }                             
+15      LLAVE_DER             }                             
+17      FN                    fn                            
+17      IDENTIFICADOR         main                          
+17      PARENTESIS_IZQ        (                             
+17      PARENTESIS_DER        )                             
+17      LLAVE_IZQ             {                             
+18      LET                   let                           
+18      MUT                   mut                           
+18      IDENTIFICADOR         contador                      
+18      DOS_PUNTOS            :                             
+18      TIPO_I32              i32                           
+18      ASIGNACION            =                             
+18      NUMERO_ENTERO         0                             
+18      PUNTO_COMA            ;                             
+19      LET                   let                           
+19      IDENTIFICADOR         limite                        
+19      ASIGNACION            =                             
+19      NUMERO_ENTERO         5                             
+19      PUNTO_COMA            ;                             
+21      WHILE                 while                         
+21      IDENTIFICADOR         contador                      
+21      MENOR                 <                             
+21      IDENTIFICADOR         limite                        
+21      LLAVE_IZQ             {                             
+22      LET                   let                           
+22      IDENTIFICADOR         resultado                     
+22      ASIGNACION            =                             
+22      IDENTIFICADOR         factorial                     
+22      PARENTESIS_IZQ        (                             
+22      IDENTIFICADOR         contador                      
+22      AS                    as                            
+22      TIPO_U32              u32                           
+22      PARENTESIS_DER        )                             
+22      PUNTO_COMA            ;                             
+23      IDENTIFICADOR         println                       
+23      NOT_LOGICO            !                             
+23      PARENTESIS_IZQ        (                             
+23      CADENA                Factorial de {} es {}         
+23      COMA                  ,                             
+23      IDENTIFICADOR         contador                      
+23      COMA                  ,                             
+23      IDENTIFICADOR         resultado                     
+23      PARENTESIS_DER        )                             
+23      PUNTO_COMA            ;                             
+24      IDENTIFICADOR         contador                      
+24      MAS_IGUAL             +=                            
+24      NUMERO_ENTERO         1                             
+24      PUNTO_COMA            ;                             
+25      LLAVE_DER             }                             
+26      LLAVE_DER             }                             
+
+--- ERRORES LEXICOS ---
+No se encontraron errores lexicos.
