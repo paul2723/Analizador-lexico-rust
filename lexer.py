@@ -162,6 +162,49 @@ t_FLECHA           = r'->'
 t_FLECHA_GRUESA    = r'=>'
 t_ARROBA           = r'@'
 t_INTERROGACION    = r'\?'
- 
 
+
+
+# Componentes a cargo: Operadores aritmeticos, asignacion, comparacion, logicos y a nivel de bits
+
+
+# --- Operadores de asignacion compuesta (deben ir ANTES que los simples) ---
+t_MAS_IGUAL      = r'\+='
+t_MENOS_IGUAL    = r'-='
+t_MULT_IGUAL     = r'\*='
+t_DIV_IGUAL      = r'/='
+t_MOD_IGUAL      = r'%='
+
+# --- Operadores de comparacion (orden: largos antes que cortos) ---
+t_IGUAL_IGUAL    = r'=='
+t_DIFERENTE      = r'!='
+t_MENOR_IGUAL    = r'<='
+t_MAYOR_IGUAL    = r'>='
+
+# --- Operadores logicos ---
+t_AND_LOGICO     = r'&&'
+t_OR_LOGICO      = r'\|\|'
+t_NOT_LOGICO     = r'!'
+
+# --- Operadores a nivel de bits (shift antes que comparacion simple) ---
+t_SHIFT_IZQ      = r'<<'
+t_SHIFT_DER      = r'>>'
+t_AND_BIT        = r'&'
+t_OR_BIT         = r'\|'
+t_XOR_BIT        = r'\^'
+
+# --- Operadores aritmeticos y de asignacion simple ---
+t_MAS            = r'\+'
+t_MENOS          = r'-'
+t_MULTIPLICACION = r'\*'
+t_DIVISION       = r'/'
+t_MODULO         = r'%'
+t_ASIGNACION     = r'='
+
+# --- Comparacion simple (deben quedar despues de <=, >=, <<, >>) ---
+t_MENOR          = r'<'
+t_MAYOR          = r'>'
+
+# --- Referencias (ampersand simple usado para &T, &mut T) ---
+t_AMPERSAND_SIMPLE = r'&'
 
