@@ -1,5 +1,5 @@
 // algoritmo3.rs
-// Algoritmo de prueba - Integrante 3
+// Algoritmo de prueba - gustavo Moscoso
 // Cubre: operadores aritmeticos, logicos, comparacion, bits
 // Incluye intencionalmente un caracter invalido para probar deteccion de errores lexicos.
 

@@ -1,0 +1,168 @@
+======================================================================
+LOG DE ANALISIS LEXICO
+======================================================================
+Desarrollador      : GustavoMoscoso
+Archivo analizado  : algoritmo3.rs
+Fecha y hora       : 22-06-2026 00:59:05
+Total de tokens    : 150
+Total de errores   : 1
+======================================================================
+
+--- TOKENS RECONOCIDOS ---
+LINEA   TOKEN                 VALOR                         
+------------------------------------------------------------
+6       FN                    fn                            
+6       IDENTIFICADOR         evaluar                       
+6       PARENTESIS_IZQ        (                             
+6       IDENTIFICADOR         a                             
+6       DOS_PUNTOS            :                             
+6       TIPO_I32              i32                           
+6       COMA                  ,                             
+6       IDENTIFICADOR         b                             
+6       DOS_PUNTOS            :                             
+6       TIPO_I32              i32                           
+6       PARENTESIS_DER        )                             
+6       FLECHA                ->                            
+6       TIPO_BOOL             bool                          
+6       LLAVE_IZQ             {                             
+7       LET                   let                           
+7       IDENTIFICADOR         suma                          
+7       ASIGNACION            =                             
+7       IDENTIFICADOR         a                             
+7       MAS                   +                             
+7       IDENTIFICADOR         b                             
+7       PUNTO_COMA            ;                             
+8       LET                   let                           
+8       IDENTIFICADOR         resta                         
+8       ASIGNACION            =                             
+8       IDENTIFICADOR         a                             
+8       MENOS                 -                             
+8       IDENTIFICADOR         b                             
+8       PUNTO_COMA            ;                             
+9       LET                   let                           
+9       IDENTIFICADOR         producto                      
+9       ASIGNACION            =                             
+9       IDENTIFICADOR         a                             
+9       MULTIPLICACION        *                             
+9       IDENTIFICADOR         b                             
+9       PUNTO_COMA            ;                             
+10      LET                   let                           
+10      IDENTIFICADOR         division                      
+10      ASIGNACION            =                             
+10      IDENTIFICADOR         a                             
+10      DIVISION              /                             
+10      IDENTIFICADOR         b                             
+10      PUNTO_COMA            ;                             
+11      LET                   let                           
+11      IDENTIFICADOR         modulo                        
+11      ASIGNACION            =                             
+11      IDENTIFICADOR         a                             
+11      MODULO                %                             
+11      IDENTIFICADOR         b                             
+11      PUNTO_COMA            ;                             
+13      LET                   let                           
+13      IDENTIFICADOR         es_igual                      
+13      ASIGNACION            =                             
+13      IDENTIFICADOR         a                             
+13      IGUAL_IGUAL           ==                            
+13      IDENTIFICADOR         b                             
+13      PUNTO_COMA            ;                             
+14      LET                   let                           
+14      IDENTIFICADOR         es_diferente                  
+14      ASIGNACION            =                             
+14      IDENTIFICADOR         a                             
+14      DIFERENTE             !=                            
+14      IDENTIFICADOR         b                             
+14      PUNTO_COMA            ;                             
+15      LET                   let                           
+15      IDENTIFICADOR         es_mayor                      
+15      ASIGNACION            =                             
+15      IDENTIFICADOR         a                             
+15      MAYOR                 >                             
+15      IDENTIFICADOR         b                             
+15      PUNTO_COMA            ;                             
+16      LET                   let                           
+16      IDENTIFICADOR         es_menor_igual                
+16      ASIGNACION            =                             
+16      IDENTIFICADOR         a                             
+16      MENOR_IGUAL           <=                            
+16      IDENTIFICADOR         b                             
+16      PUNTO_COMA            ;                             
+18      LET                   let                           
+18      IDENTIFICADOR         resultado_logico              
+18      ASIGNACION            =                             
+18      PARENTESIS_IZQ        (                             
+18      IDENTIFICADOR         a                             
+18      MAYOR                 >                             
+18      NUMERO_ENTERO         0                             
+18      PARENTESIS_DER        )                             
+18      AND_LOGICO            &&                            
+18      PARENTESIS_IZQ        (                             
+18      IDENTIFICADOR         b                             
+18      MAYOR                 >                             
+18      NUMERO_ENTERO         0                             
+18      PARENTESIS_DER        )                             
+18      OR_LOGICO             ||                            
+18      PARENTESIS_IZQ        (                             
+18      IDENTIFICADOR         a                             
+18      IGUAL_IGUAL           ==                            
+18      NUMERO_ENTERO         0                             
+18      PARENTESIS_DER        )                             
+18      PUNTO_COMA            ;                             
+20      LET                   let                           
+20      IDENTIFICADOR         desplazado                    
+20      ASIGNACION            =                             
+20      IDENTIFICADOR         a                             
+20      SHIFT_IZQ             <<                            
+20      NUMERO_ENTERO         2                             
+20      PUNTO_COMA            ;                             
+21      LET                   let                           
+21      IDENTIFICADOR         combinado                     
+21      ASIGNACION            =                             
+21      IDENTIFICADOR         a                             
+21      AMPERSAND             &                             
+21      IDENTIFICADOR         b                             
+21      PUNTO_COMA            ;                             
+23      RETURN                return                        
+23      IDENTIFICADOR         es_igual                      
+23      AND_LOGICO            &&                            
+23      IDENTIFICADOR         resultado_logico              
+23      PUNTO_COMA            ;                             
+24      LLAVE_DER             }                             
+26      FN                    fn                            
+26      IDENTIFICADOR         main                          
+26      PARENTESIS_IZQ        (                             
+26      PARENTESIS_DER        )                             
+26      LLAVE_IZQ             {                             
+27      LET                   let                           
+27      IDENTIFICADOR         x                             
+27      ASIGNACION            =                             
+27      NUMERO_ENTERO         10                            
+27      PUNTO_COMA            ;                             
+28      LET                   let                           
+28      IDENTIFICADOR         y                             
+28      ASIGNACION            =                             
+28      NUMERO_ENTERO         3                             
+28      PUNTO_COMA            ;                             
+29      LET                   let                           
+29      IDENTIFICADOR         r                             
+29      ASIGNACION            =                             
+29      IDENTIFICADOR         evaluar                       
+29      PARENTESIS_IZQ        (                             
+29      IDENTIFICADOR         x                             
+29      COMA                  ,                             
+29      IDENTIFICADOR         y                             
+29      PARENTESIS_DER        )                             
+29      PUNTO_COMA            ;                             
+32      LET                   let                           
+32      IDENTIFICADOR         z                             
+32      ASIGNACION            =                             
+32      IDENTIFICADOR         x                             
+32      IDENTIFICADOR         y                             
+32      PUNTO_COMA            ;                             
+33      LLAVE_DER             }                             
+
+--- ERRORES LEXICOS ---
+LINEA   MENSAJE
+------------------------------------------------------------
+32      Caracter no reconocido '$'
