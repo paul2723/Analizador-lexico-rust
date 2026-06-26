@@ -386,3 +386,217 @@ def p_argumentos(p):
         p[0] = p[1] + [p[3]]
     else:
         p[0] = [p[1]]
+
+# ================================================================
+# APORTE 3 - Moscoso Ramos Gustavo
+# Responsabilidad: asignaciones, operadores, expresiones,
+# return y manejo de errores sintacticos.
+# ================================================================
+
+def p_asignacion(p):
+    'asignacion : asignable operador_asignacion expresion'
+    p[0] = ('asignacion', p[1], p[2], p[3])
+
+
+def p_asignable(p):
+    '''asignable : IDENTIFICADOR
+                 | acceso_miembro'''
+    p[0] = p[1]
+
+
+def p_operador_asignacion(p):
+    '''operador_asignacion : ASIGNACION
+                           | MAS_IGUAL
+                           | MENOS_IGUAL
+                           | MULT_IGUAL
+                           | DIV_IGUAL
+                           | MOD_IGUAL'''
+    p[0] = p[1]
+
+
+def p_retorno(p):
+    '''retorno : RETURN expresion
+               | RETURN'''
+    p[0] = ('return', p[2]) if len(p) == 3 else ('return', None)
+
+
+def p_seleccion_match(p):
+    'seleccion_match : MATCH expresion LLAVE_IZQ brazos_match_opt LLAVE_DER'
+    p[0] = ('match', p[2], p[4])
+
+
+def p_brazos_match_opt(p):
+    '''brazos_match_opt : brazos_match
+                        | vacio'''
+    p[0] = p[1]
+
+
+def p_brazos_match(p):
+    '''brazos_match : brazos_match brazo_match
+                    | brazo_match'''
+    if len(p) == 3:
+        p[0] = p[1] + [p[2]]
+    else:
+        p[0] = [p[1]]
+
+
+def p_brazo_match(p):
+    '''brazo_match : patron FLECHA_GRUESA expresion coma_opt
+                   | patron FLECHA_GRUESA bloque coma_opt'''
+    p[0] = ('brazo', p[1], p[3])
+
+
+def p_patron(p):
+    '''patron : IDENTIFICADOR
+              | NUMERO_ENTERO
+              | TRUE
+              | FALSE
+              | CARACTER_LITERAL
+              | CADENA'''
+    p[0] = ('patron', p[1])
+
+
+def p_expresion_binaria(p):
+    '''expresion : expresion MAS expresion
+                 | expresion MENOS expresion
+                 | expresion MULTIPLICACION expresion
+                 | expresion DIVISION expresion
+                 | expresion MODULO expresion
+                 | expresion IGUAL_IGUAL expresion
+                 | expresion DIFERENTE expresion
+                 | expresion MENOR expresion
+                 | expresion MAYOR expresion
+                 | expresion MENOR_IGUAL expresion
+                 | expresion MAYOR_IGUAL expresion
+                 | expresion AND_LOGICO expresion
+                 | expresion OR_LOGICO expresion
+                 | expresion OR_BIT expresion
+                 | expresion XOR_BIT expresion
+                 | expresion AMPERSAND expresion
+                 | expresion SHIFT_IZQ expresion
+                 | expresion SHIFT_DER expresion'''
+    p[0] = ('binaria', p[2], p[1], p[3])
+
+
+def p_expresion_cast(p):
+    'expresion : expresion AS tipo'
+    p[0] = ('cast', p[1], p[3])
+
+
+def p_expresion_rango(p):
+    'expresion : expresion PUNTO PUNTO expresion'
+    p[0] = ('rango', p[1], p[4])
+
+
+def p_expresion_unaria(p):
+    '''expresion : NOT_LOGICO expresion
+                 | MENOS expresion %prec UMENOS
+                 | AMPERSAND expresion %prec REFERENCIA
+                 | AMPERSAND MUT expresion %prec REFERENCIA'''
+    if len(p) == 3:
+        p[0] = ('unaria', p[1], p[2])
+    else:
+        p[0] = ('referencia_mut', p[3])
+
+
+def p_expresion_grupo(p):
+    'expresion : PARENTESIS_IZQ expresion PARENTESIS_DER'
+    p[0] = p[2]
+
+
+def p_expresion_tupla(p):
+    'expresion : PARENTESIS_IZQ argumentos COMA PARENTESIS_DER'
+    p[0] = ('tupla', p[2])
+
+
+def p_expresion_array(p):
+    'expresion : CORCHETE_IZQ argumentos_opt CORCHETE_DER'
+    p[0] = ('array', p[2])
+
+
+def p_expresion_acceso_indice(p):
+    'expresion : expresion CORCHETE_IZQ expresion CORCHETE_DER'
+    p[0] = ('indice', p[1], p[3])
+
+
+def p_expresion_llamada_metodo(p):
+    'expresion : acceso_miembro PARENTESIS_IZQ argumentos_opt PARENTESIS_DER'
+    p[0] = ('metodo', p[1], p[3])
+
+
+def p_acceso_miembro(p):
+    'acceso_miembro : expresion PUNTO IDENTIFICADOR'
+    p[0] = ('acceso', p[1], p[3])
+
+
+def p_expresion_base(p):
+    '''expresion : NUMERO_ENTERO
+                 | NUMERO_FLOTANTE
+                 | CADENA
+                 | CARACTER_LITERAL
+                 | TRUE
+                 | FALSE
+                 | IDENTIFICADOR
+                 | ruta
+                 | llamada_funcion
+                 | llamada_macro'''
+    p[0] = ('expr', p[1])
+
+
+def p_vacio(p):
+    'vacio :'
+    p[0] = []
+
+
+def p_error(p):
+    if p:
+        mensaje = (
+            f"Error sintactico: token inesperado '{p.value}' "
+            f"de tipo {p.type} en la linea {p.lineno}."
+        )
+        errores_sintacticos.append({
+            'linea': p.lineno,
+            'token': p.type,
+            'valor': p.value,
+            'mensaje': mensaje,
+        })
+        # Se descarta el token inesperado para intentar continuar.
+        parser.errok()
+    else:
+        mensaje = 'Error sintactico: fin de archivo inesperado. Falta cerrar una estructura o completar una sentencia.'
+        errores_sintacticos.append({
+            'linea': 'EOF',
+            'token': 'EOF',
+            'valor': '',
+            'mensaje': mensaje,
+        })
+
+
+def construir_parser():
+    return yacc.yacc(start='programa', debug=False, write_tables=False, errorlog=yacc.NullLogger())
+
+
+parser = construir_parser()
+
+
+def analizar_sintactico(codigo_fuente):
+    """Ejecuta el analisis sintactico sobre codigo Rust.
+
+    Retorna un diccionario con:
+    - valido: True si no hay errores lexicos ni sintacticos.
+    - ast: arbol sintactico abstracto simplificado.
+    - errores_lexicos: errores generados por lexer.py.
+    - errores_sintacticos: errores generados por parser.py.
+    """
+    global errores_sintacticos
+    errores_sintacticos = []
+
+    lexer = construir_lexer()
+    resultado = parser.parse(codigo_fuente, lexer=lexer)
+
+    return {
+        'valido': len(lexer.errores) == 0 and len(errores_sintacticos) == 0,
+        'ast': resultado,
+        'errores_lexicos': lexer.errores,
+        'errores_sintacticos': errores_sintacticos,
+    }
