@@ -1,0 +1,59 @@
+========================================================================
+LOG DE ANALISIS SINTACTICO
+========================================================================
+Desarrollador      : CristhianHerrera
+Archivo analizado  : algoritmo1.rs
+Fecha y hora       : 26-06-2026 18:39:21
+Resultado          : ACEPTADO
+Errores lexicos    : 0
+Errores sintacticos: 0
+========================================================================
+
+--- REGLAS SINTACTICAS VALIDADAS ---
+El parser valida un subconjunto de Rust con funciones, bloques,
+declaraciones let, mutabilidad, tipos, estructuras, condicionales,
+ciclos, expresiones, operadores, llamadas a funciones y macros.
+
+--- RESULTADO GENERAL ---
+El archivo cumple con la gramatica definida para el subconjunto de Rust.
+
+--- REVISION LINEA POR LINEA ---
+Esta seccion muestra cada linea del archivo y su estado.
+Si una linea aparece como CORRECTA, no se detectaron errores asociados a esa linea.
+Si aparece como ERROR SINTACTICO, la estructura no cumple la gramatica definida.
+Si aparece como ERROR LEXICO, contiene simbolos o tokens no reconocidos.
+
+LINEA   ESTADO                      CODIGO
+----------------------------------------------------------------------------------------------------
+1       CORRECTA                    // algoritmo1.rs
+2       CORRECTA                    // Algoritmo de prueba - Cristhian Herrera
+3       CORRECTA                    // Cubre: palabras reservadas, identificadores, comentarios de linea y bloque
+4       CORRECTA                    
+5       CORRECTA                    /*
+6       CORRECTA                     * Funcion que calcula el factorial de un numero usando recursividad.
+7       CORRECTA                     * Sirve para probar: fn, let, mut, if, else, return, identificadores.
+8       CORRECTA                     */
+9       CORRECTA                    fn factorial(n: u32) -> u32 {
+10      CORRECTA                        if n == 0 {
+11      CORRECTA                            return 1;
+12      CORRECTA                        } else {
+13      CORRECTA                            return n * factorial(n - 1);
+14      CORRECTA                        }
+15      CORRECTA                    }
+16      CORRECTA                    
+17      CORRECTA                    fn main() {
+18      CORRECTA                        let mut contador: i32 = 0;
+19      CORRECTA                        let limite = 5;
+20      CORRECTA                    
+21      CORRECTA                        while contador < limite {
+22      CORRECTA                            let resultado = factorial(contador as u32);
+23      CORRECTA                            println!("Factorial de {} es {}", contador, resultado);
+24      CORRECTA                            contador += 1;
+25      CORRECTA                        }
+26      CORRECTA                    }
+
+--- ERRORES LEXICOS HEREDADOS DEL LEXER ---
+No se encontraron errores lexicos.
+
+--- ERRORES SINTACTICOS ---
+No se encontraron errores sintacticos.

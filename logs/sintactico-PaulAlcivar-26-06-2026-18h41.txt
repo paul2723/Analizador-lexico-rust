@@ -1,0 +1,66 @@
+========================================================================
+LOG DE ANALISIS SINTACTICO
+========================================================================
+Desarrollador      : PaulAlcivar
+Archivo analizado  : algoritmo2.rs
+Fecha y hora       : 26-06-2026 18:41:07
+Resultado          : ACEPTADO
+Errores lexicos    : 0
+Errores sintacticos: 0
+========================================================================
+
+--- REGLAS SINTACTICAS VALIDADAS ---
+El parser valida un subconjunto de Rust con funciones, bloques,
+declaraciones let, mutabilidad, tipos, estructuras, condicionales,
+ciclos, expresiones, operadores, llamadas a funciones y macros.
+
+--- RESULTADO GENERAL ---
+El archivo cumple con la gramatica definida para el subconjunto de Rust.
+
+--- REVISION LINEA POR LINEA ---
+Esta seccion muestra cada linea del archivo y su estado.
+Si una linea aparece como CORRECTA, no se detectaron errores asociados a esa linea.
+Si aparece como ERROR SINTACTICO, la estructura no cumple la gramatica definida.
+Si aparece como ERROR LEXICO, contiene simbolos o tokens no reconocidos.
+
+LINEA   ESTADO                      CODIGO
+----------------------------------------------------------------------------------------------------
+1       CORRECTA                    // algoritmo2.rs
+2       CORRECTA                    // Algoritmo de prueba - Paul Alcivar Zavala
+3       CORRECTA                    // Cubre: tipos de datos primitivos, literales, estructuras de datos, delimitadores
+4       CORRECTA                    
+5       CORRECTA                    struct Persona {
+6       CORRECTA                        nombre: String,
+7       CORRECTA                        edad: u8,
+8       CORRECTA                        altura: f64,
+9       CORRECTA                        activo: bool,
+10      CORRECTA                    }
+11      CORRECTA                    
+12      CORRECTA                    fn main() {
+13      CORRECTA                        let nombre: String = String::from("Maria");
+14      CORRECTA                        let edad: u8 = 25;
+15      CORRECTA                        let altura: f64 = 1.68;
+16      CORRECTA                        let activo: bool = true;
+17      CORRECTA                        let inicial: char = 'M';
+18      CORRECTA                    
+19      CORRECTA                        let persona = Persona {
+20      CORRECTA                            nombre: nombre,
+21      CORRECTA                            edad: edad,
+22      CORRECTA                            altura: altura,
+23      CORRECTA                            activo: activo,
+24      CORRECTA                        };
+25      CORRECTA                    
+26      CORRECTA                        let numeros: Vec<i32> = vec![1, 2, 3, 4, 5];
+27      CORRECTA                    
+28      CORRECTA                        for n in &numeros {
+29      CORRECTA                            println!("Numero: {}", n);
+30      CORRECTA                        }
+31      CORRECTA                    
+32      CORRECTA                        let opcion: Option<i32> = Some(10);
+33      CORRECTA                    }
+
+--- ERRORES LEXICOS HEREDADOS DEL LEXER ---
+No se encontraron errores lexicos.
+
+--- ERRORES SINTACTICOS ---
+No se encontraron errores sintacticos.

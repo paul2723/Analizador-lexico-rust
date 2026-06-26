@@ -1,10 +1,100 @@
 # EJECUTOR DEL ANALIZADOR SINTACTICO DE RUST
 # Genera logs de prueba por integrante, parecido a ejecutar_lexico.py.
+# Incluye revision linea por linea para indicar si cada linea esta correcta
+# o si contiene errores lexicos/sintacticos.
 
 import sys
 import os
 from datetime import datetime
 from parser import analizar_sintactico
+
+
+def obtener_estado_lineas(codigo_fuente, errores_lexicos, errores_sintacticos):
+    """
+    Revisa el codigo fuente linea por linea y marca cada linea como:
+    - CORRECTA
+    - ERROR LEXICO
+    - ERROR SINTACTICO
+    - ERROR LEXICO Y SINTACTICO
+
+    Nota:
+    En algunos errores sintacticos, el parser puede reportar el error en la linea
+    donde encuentra el token inesperado, no siempre en la linea exacta donde empezo
+    el problema. Por ejemplo, si falta un punto y coma en la linea 2, el error puede
+    aparecer en la linea 3 porque ahi el parser detecta que algo no encaja.
+    """
+
+    lineas = codigo_fuente.splitlines()
+
+    errores_por_linea = {}
+
+    # Registrar errores lexicos por linea
+    for err in errores_lexicos:
+        linea = err.get('linea')
+        if linea is None:
+            continue
+
+        if linea not in errores_por_linea:
+            errores_por_linea[linea] = {
+                'lexicos': [],
+                'sintacticos': []
+            }
+
+        errores_por_linea[linea]['lexicos'].append(err.get('mensaje'))
+
+    # Registrar errores sintacticos por linea
+    for err in errores_sintacticos:
+        linea = err.get('linea')
+        if linea is None:
+            continue
+
+        if linea not in errores_por_linea:
+            errores_por_linea[linea] = {
+                'lexicos': [],
+                'sintacticos': []
+            }
+
+        errores_por_linea[linea]['sintacticos'].append(err.get('mensaje'))
+
+    revision = []
+
+    for numero_linea, contenido in enumerate(lineas, start=1):
+        datos_error = errores_por_linea.get(
+            numero_linea,
+            {
+                'lexicos': [],
+                'sintacticos': []
+            }
+        )
+
+        tiene_lexico = len(datos_error['lexicos']) > 0
+        tiene_sintactico = len(datos_error['sintacticos']) > 0
+
+        if tiene_lexico and tiene_sintactico:
+            estado = "ERROR LEXICO Y SINTACTICO"
+        elif tiene_lexico:
+            estado = "ERROR LEXICO"
+        elif tiene_sintactico:
+            estado = "ERROR SINTACTICO"
+        else:
+            estado = "CORRECTA"
+
+        mensajes = []
+
+        for mensaje in datos_error['lexicos']:
+            mensajes.append(f"Lexico: {mensaje}")
+
+        for mensaje in datos_error['sintacticos']:
+            mensajes.append(f"Sintactico: {mensaje}")
+
+        revision.append({
+            'linea': numero_linea,
+            'estado': estado,
+            'codigo': contenido,
+            'mensajes': mensajes
+        })
+
+    return revision
 
 
 def analizar_archivo_sintactico(ruta_archivo, nombre_apellido):
@@ -27,6 +117,12 @@ def analizar_archivo_sintactico(ruta_archivo, nombre_apellido):
 
     errores_lexicos = resultado['errores_lexicos']
     errores_sintacticos = resultado['errores_sintacticos']
+
+    revision_lineas = obtener_estado_lineas(
+        codigo_fuente,
+        errores_lexicos,
+        errores_sintacticos
+    )
 
     with open(ruta_log, 'w', encoding='utf-8') as log:
         log.write("=" * 72 + "\n")
@@ -51,6 +147,29 @@ def analizar_archivo_sintactico(ruta_archivo, nombre_apellido):
         else:
             log.write("El archivo NO cumple completamente con la gramatica definida.\n")
             log.write("Revise los errores listados a continuacion.\n")
+
+        # ============================================================
+        # NUEVA SECCION: REVISION LINEA POR LINEA
+        # ============================================================
+        log.write("\n--- REVISION LINEA POR LINEA ---\n")
+        log.write("Esta seccion muestra cada linea del archivo y su estado.\n")
+        log.write("Si una linea aparece como CORRECTA, no se detectaron errores asociados a esa linea.\n")
+        log.write("Si aparece como ERROR SINTACTICO, la estructura no cumple la gramatica definida.\n")
+        log.write("Si aparece como ERROR LEXICO, contiene simbolos o tokens no reconocidos.\n\n")
+
+        log.write(f"{'LINEA':<8}{'ESTADO':<28}{'CODIGO'}\n")
+        log.write("-" * 100 + "\n")
+
+        for item in revision_lineas:
+            log.write(
+                f"{str(item['linea']):<8}"
+                f"{item['estado']:<28}"
+                f"{item['codigo']}\n"
+            )
+
+            if item['mensajes']:
+                for mensaje in item['mensajes']:
+                    log.write(f"{'':<8}{'Detalle:':<28}{mensaje}\n")
 
         log.write("\n--- ERRORES LEXICOS HEREDADOS DEL LEXER ---\n")
         if errores_lexicos:
