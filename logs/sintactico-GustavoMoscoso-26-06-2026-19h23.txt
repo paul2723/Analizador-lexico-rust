@@ -1,0 +1,73 @@
+========================================================================
+LOG DE ANALISIS SINTACTICO
+========================================================================
+Desarrollador      : GustavoMoscoso
+Archivo analizado  : algoritmo3.rs
+Fecha y hora       : 26-06-2026 19:23:23
+Resultado          : RECHAZADO
+Errores lexicos    : 1
+Errores sintacticos: 1
+========================================================================
+
+--- REGLAS SINTACTICAS VALIDADAS ---
+El parser valida un subconjunto de Rust con funciones, bloques,
+declaraciones let, mutabilidad, tipos, estructuras, condicionales,
+ciclos, expresiones, operadores, llamadas a funciones y macros.
+
+--- RESULTADO GENERAL ---
+El archivo NO cumple completamente con la gramatica definida.
+Revise los errores listados a continuacion.
+
+--- REVISION LINEA POR LINEA ---
+Esta seccion muestra cada linea del archivo y su estado.
+Si una linea aparece como CORRECTA, no se detectaron errores asociados a esa linea.
+Si aparece como ERROR SINTACTICO, la estructura no cumple la gramatica definida.
+Si aparece como ERROR LEXICO, contiene simbolos o tokens no reconocidos.
+
+LINEA   ESTADO                      CODIGO
+----------------------------------------------------------------------------------------------------
+1       CORRECTA                    // algoritmo3.rs
+2       CORRECTA                    // Algoritmo de prueba - gustavo Moscoso
+3       CORRECTA                    // Cubre: operadores aritmeticos, logicos, comparacion, bits
+4       CORRECTA                    // Incluye intencionalmente un caracter invalido para probar deteccion de errores lexicos.
+5       CORRECTA                    
+6       CORRECTA                    fn evaluar(a: i32, b: i32) -> bool {
+7       CORRECTA                        let suma = a + b;
+8       CORRECTA                        let resta = a - b;
+9       CORRECTA                        let producto = a * b;
+10      CORRECTA                        let division = a / b;
+11      CORRECTA                        let modulo = a % b;
+12      CORRECTA                    
+13      CORRECTA                        let es_igual = a == b;
+14      CORRECTA                        let es_diferente = a != b;
+15      CORRECTA                        let es_mayor = a > b;
+16      CORRECTA                        let es_menor_igual = a <= b;
+17      CORRECTA                    
+18      CORRECTA                        let resultado_logico = (a > 0) && (b > 0) || (a == 0);
+19      CORRECTA                    
+20      CORRECTA                        let desplazado = a << 2;
+21      CORRECTA                        let combinado = a & b;
+22      CORRECTA                    
+23      CORRECTA                        return es_igual && resultado_logico;
+24      CORRECTA                    }
+25      CORRECTA                    
+26      CORRECTA                    fn main() {
+27      CORRECTA                        let x = 10;
+28      CORRECTA                        let y = 3;
+29      CORRECTA                        let r = evaluar(x, y);
+30      CORRECTA                    
+31      CORRECTA                        // La siguiente linea contiene un caracter no valido en Rust ('$')
+32      ERROR LEXICO Y SINTACTICO       let z = x $ y;
+        Detalle:                    Lexico: Caracter no reconocido '$'
+        Detalle:                    Sintactico: Error sintactico: token inesperado 'y' de tipo IDENTIFICADOR en la linea 32.
+33      CORRECTA                    }
+
+--- ERRORES LEXICOS HEREDADOS DEL LEXER ---
+LINEA   MENSAJE
+------------------------------------------------------------
+32      Caracter no reconocido '$'
+
+--- ERRORES SINTACTICOS ---
+LINEA   TOKEN                 VALOR                    MENSAJE
+------------------------------------------------------------------------------------------
+32      IDENTIFICADOR         y                        Error sintactico: token inesperado 'y' de tipo IDENTIFICADOR en la linea 32.
